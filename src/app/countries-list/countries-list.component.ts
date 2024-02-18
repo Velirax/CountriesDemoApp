@@ -23,7 +23,7 @@ export class CountriesListComponent {
   allCountries:Country[] = [];
   filteredList:Country[] = [];
   searchData: string = '';
-
+  regionData:string = '';
 
   fetchAllCountries() {
     this.fetchCountriesService.getAllCountries().subscribe((response: Country[]) => {
@@ -40,11 +40,24 @@ export class CountriesListComponent {
     } else {
       this.filteredList = this.allCountries;
     }
+    console.log('test');
+    if(this.regionData != "All"){
+      this.filteredList = this.filteredList.filter(country =>
+        country.region.toLowerCase().includes(this.regionData.toLocaleLowerCase())
+        );
+    } else if(!this.searchData){
+      this.filteredList = this.allCountries;
+    }
   }
   ngOnInit() {
     this.fetchAllCountries();
     this.formSubmitServiceService.searchData$.subscribe((searchData: string) => {
       this.searchData = searchData;
+      this.filterCountries();
+    });
+    
+    this.formSubmitServiceService.regionData$.subscribe((regionData: string) => {
+      this.regionData = regionData;
       this.filterCountries();
     });
   }
