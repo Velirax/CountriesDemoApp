@@ -5,7 +5,7 @@
     <a routerLink="/countries" routerLinkActive="active"  class="item" >Countries</a>
     <a routerLink="/about" routerLinkActive="active" class="item">About</a>
     <div class="right menu">
-      <div class="item" style="z-index: 2000 !important;">
+      <div class="item" style="z-index: 2000 !important;" *ngIf="isCountriesRoute()">
         <div class="ui simple selection dropdown">
           <input type="hidden" name="region" >
           <i class="dropdown icon"></i>

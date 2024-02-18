@@ -32,4 +32,7 @@ export class AppComponent {
     this.region = (event.target as HTMLInputElement).textContent as string;
     this.formSubmitService.setRegionData(this.region);
   }
+  isCountriesRoute(): boolean {
+    return this.router.url === '/countries';
+  }
 }
