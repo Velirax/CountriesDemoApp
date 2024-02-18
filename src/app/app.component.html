@@ -1,0 +1,18 @@
+<div class="ui container">
+  <div class="ui pointing menu">
+    <img [src]="imagePath" style="max-width: 100%;max-height: 50px;"/>
+    <a routerLink="" routerLinkActive="active" class="item" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/countries" routerLinkActive="active"  class="item" >Countries</a>
+    <a routerLink="/about" routerLinkActive="active" class="item">About</a>
+    <div class="right menu">
+      <div class="item">
+        <div class="ui transparent icon input">
+          <input (input)="onInput($event)" type="text" placeholder="Search countries...">
+        </div> 
+      </div>
+    </div>
+  </div>
+  <div class="ui bottom attached segment">
+    <router-outlet></router-outlet>
+  </div>
+</div>
