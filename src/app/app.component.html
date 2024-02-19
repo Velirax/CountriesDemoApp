@@ -16,9 +16,13 @@
         </div>
       </div>
       <div class="item">
-        <div class="ui transparent icon input">
-          <input (input)="onInput($event)" type="text" placeholder="Search countries...">
-        </div> 
+        <div class="ui search">
+          <div class="ui icon input">
+            <input  (input)="onInput($event)" class="prompt" type="text" placeholder="Search countries...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
       </div>
     </div>
   </div>

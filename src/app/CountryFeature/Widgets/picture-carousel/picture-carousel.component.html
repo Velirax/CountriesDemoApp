@@ -1,0 +1,9 @@
+<div>
+<div class="ui carousel">
+    <div class="ui carousel-slider" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+      <img class="ui image" [style.height.px]="imageHeigth" [style.width.px]="imageWidth" *ngFor="let image of images;let i = index" [src]="images[i].urls.regular"  alt="Image">
+    </div>
+    <div class="ui carousel-prev" (click)="prevImage()"><i class="angle left icon"></i></div>
+    <div class="ui carousel-next" (click)="nextImage()"><i class="angle right icon"></i></div>
+  </div>
+</div> 

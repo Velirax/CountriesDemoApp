@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
-import { FormSubmitServiceService } from './form-submit-service.service';
+import { FormSubmitServiceService } from './CountryFeature/services/form-submit-service.service';
 
 @Component({
     selector: 'app-root',

@@ -1,32 +1,38 @@
 import { Component, Pipe } from '@angular/core';
 import { RouterOutlet , RouterModule} from '@angular/router';
-import { CountryComponent } from "../country/country.component";
-import { Country, FetchCountriesService } from '../fetch-countries.service';
+import { CountryComponent } from '../country/country.component';
+import { Country, FetchCountriesService} from '../services/fetch-countries.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { toArray } from 'rxjs';
 import { Input } from '@angular/core';
-import { FormSubmitServiceService } from '../form-submit-service.service';
+import { FormSubmitServiceService } from '../services/form-submit-service.service';
+import { NotFoundComponent } from "../../not-found/not-found.component";
 
 @Component({
     selector: 'app-countries-list',
     standalone: true,
     templateUrl: './countries-list.component.html',
     styleUrl: './countries-list.component.css',
-    imports: [RouterOutlet, RouterModule, CountryComponent, HttpClientModule, CommonModule]
+    imports: [RouterOutlet, RouterModule, CountryComponent, HttpClientModule, CommonModule, NotFoundComponent]
 })
 
 export class CountriesListComponent {
+
+
   constructor(private fetchCountriesService : FetchCountriesService, private formSubmitServiceService: FormSubmitServiceService){
     this.fetchAllCountries();
   }
-  allCountries:Country[] = [];
-  filteredList:Country[] = [];
+ 
+  allCountries: Country[] = [];
+  filteredList: Country[] = [];
   searchData: string = '';
-  regionData:string = '';
+  regionData: string = '';
+  showSpinner:boolean = true;
 
   fetchAllCountries() {
     this.fetchCountriesService.getAllCountries().subscribe((response: Country[]) => {
+      this.showSpinner = false;
       this.allCountries = response;
       this.filterCountries();
     });
@@ -40,7 +46,6 @@ export class CountriesListComponent {
     } else {
       this.filteredList = this.allCountries;
     }
-    console.log('test');
     if(this.regionData != "All"){
       this.filteredList = this.filteredList.filter(country =>
         country.region.toLowerCase().includes(this.regionData.toLocaleLowerCase())
@@ -77,5 +82,12 @@ export class CountriesListComponent {
   }
   getPopulation(country:Country):string{
     return country.population.toString() && country.population > 0 ? country.population.toString() : '0';
+  }
+  clickable:boolean = false;
+  offHover() {
+    this.clickable = !this.clickable;
+  }
+  onHover() {
+    this.clickable = !this.clickable;
   }
 }
