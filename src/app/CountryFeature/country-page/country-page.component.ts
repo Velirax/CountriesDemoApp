@@ -19,14 +19,15 @@ export class CountryPageComponent {
   activatedRouter = inject(ActivatedRoute);
   dataService = inject(FetchCountriesService);
   pictureService = inject(FetchPicturesService);
-  pictureArray:any[] = [];
+  pictureArray:string[] = [];
   urls: string[] = [];
 
   ngOnInit(): void {
     this.dataService.getSpecificCountry(this.activatedRouter.snapshot.params['name']).subscribe(x => {
       this.countryObject = x[0]});
+
       this.pictureService.getPhotosByCountryName(this.activatedRouter.snapshot.params['name']).subscribe(x =>{
-        this.pictureArray = x.results;
+        this.pictureArray = x;
       });
   }
 }

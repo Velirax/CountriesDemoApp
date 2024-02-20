@@ -83,11 +83,5 @@ export class CountriesListComponent {
   getPopulation(country:Country):string{
     return country.population.toString() && country.population > 0 ? country.population.toString() : '0';
   }
-  clickable:boolean = false;
-  offHover() {
-    this.clickable = !this.clickable;
-  }
-  onHover() {
-    this.clickable = !this.clickable;
-  }
+  
 }

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { FormSubmitServiceService } from './CountryFeature/services/form-submit-service.service';
+import { FetchCountriesService } from './CountryFeature/services/fetch-countries.service';
 
 @Component({
     selector: 'app-root',
@@ -11,13 +12,14 @@ import { FormSubmitServiceService } from './CountryFeature/services/form-submit-
     imports: [RouterOutlet, RouterModule, CommonModule]
 })
 export class AppComponent {
-  constructor(private formSubmitService : FormSubmitServiceService, private router: Router) {
+  constructor(private formSubmitService : FormSubmitServiceService, private router: Router) {}
+  fetchCountriesService = inject(FetchCountriesService);
+  regionList:any;
 
-  }
   isDropdownActive = false;
-  regionsArray = ['All','Europe', 'Asia', "Americas", 'Oceania']
   ngOnInit() {
     const searchData = this.formSubmitService.getSearchData();
+    this.fetchAllRegions();
   }
   @Output() submitted = new EventEmitter<string>(); 
   imagePath = './assets/Pictures/Countries.png'
@@ -35,4 +37,11 @@ export class AppComponent {
   isCountriesRoute(): boolean {
     return this.router.url === '/countries';
   }
+  fetchAllRegions(){
+    this.fetchCountriesService.getAllRegions().subscribe((response : any) =>{
+      this.regionList = ['All',...new Set(response[0])];
+      
+    })
+  }
+
 }

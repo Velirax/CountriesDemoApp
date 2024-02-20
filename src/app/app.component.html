@@ -9,13 +9,13 @@
         <div class="ui simple selection dropdown">
           <input type="hidden" name="region" >
           <i class="dropdown icon"></i>
-          <div class="text">{{region || 'Select a region'}}</div>
+          <div class="text">{{region || regionList[0]}}</div>
           <div class="menu">
-            <div class="item" (click)="onClick($event)" *ngFor="let region of regionsArray">{{region}}</div>
+            <div class="item" (click)="onClick($event)" *ngFor="let region of regionList">{{region}}</div>
           </div>
         </div>
       </div>
-      <div class="item">
+      <div class="item" *ngIf="isCountriesRoute()">
         <div class="ui search">
           <div class="ui icon input">
             <input  (input)="onInput($event)" class="prompt" type="text" placeholder="Search countries...">

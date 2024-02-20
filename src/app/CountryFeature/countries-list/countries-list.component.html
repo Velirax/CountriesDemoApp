@@ -2,8 +2,8 @@
 <div class="ui three column divided grid" *ngIf="!showSpinner" >
   <div class="row" style="display: flex; flex-wrap: wrap;">
     <ng-container *ngFor="let country of filteredList; let j = index;">
-      <div class="column" style="padding: 10px; flex: 1 0 33.33%;" class="post-item">
-        <app-country style="cursor: pointer;" [name]="getCountryName(country)" [capital]="getCapital(country)" [flagUrl]="getFlagUrl(country)" [population]="getPopulation(country)"></app-country>
+      <div class="column" style="padding: 10px; flex: 1 0 33.33%; cursor: pointer;" class="post-item" >
+        <app-country  [name]="getCountryName(country)" [capital]="getCapital(country)" [flagUrl]="getFlagUrl(country)" [population]="getPopulation(country)"></app-country>
       </div>
     </ng-container>
   </div>
