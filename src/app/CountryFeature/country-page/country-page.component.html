@@ -1,1 +1,3 @@
-<app-picture-carousel [images]="pictureArray" [imageWidth]="250" [imageHeigth]="250"></app-picture-carousel>
+<app-loading-spinner *ngIf="!isLoaded"></app-loading-spinner>
+
+<app-picture-carousel [images]="pictureArray" [imageWidth]="250" [imageHeigth]="250" *ngIf="isLoaded"></app-picture-carousel>

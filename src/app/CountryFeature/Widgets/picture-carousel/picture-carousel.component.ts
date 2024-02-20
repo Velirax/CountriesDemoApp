@@ -11,8 +11,8 @@ import { Input } from '@angular/core';
 export class PictureCarouselComponent {
   @Input() images: any[] = [];
   currentIndex: number = 0;
-  @Input() imageWidth:number = 100;
-  @Input() imageHeigth:number = 200;
+  @Input() imageWidth?:number;
+  @Input() imageHeigth?:number;
   prevImage() {
     if (this.currentIndex > 0) {
       this.currentIndex--;

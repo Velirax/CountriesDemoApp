@@ -11,6 +11,7 @@ export class FormSubmitServiceService {
 
   private regionDataSubject:BehaviorSubject<string> = new BehaviorSubject<string>('');
   regionData$ = this.regionDataSubject.asObservable();
+    snapshot: any;
 
   setSearchData(searchData: string): void {
     this.searchDataSubject.next(searchData);

@@ -4,17 +4,16 @@ import { CountryComponent } from '../country/country.component';
 import { Country, FetchCountriesService} from '../services/fetch-countries.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { toArray } from 'rxjs';
-import { Input } from '@angular/core';
 import { FormSubmitServiceService } from '../services/form-submit-service.service';
 import { NotFoundComponent } from "../../not-found/not-found.component";
+import { LoadingSpinnerComponent } from "../Widgets/loading-spinner/loading-spinner.component";
 
 @Component({
     selector: 'app-countries-list',
     standalone: true,
     templateUrl: './countries-list.component.html',
     styleUrl: './countries-list.component.css',
-    imports: [RouterOutlet, RouterModule, CountryComponent, HttpClientModule, CommonModule, NotFoundComponent]
+    imports: [RouterOutlet, RouterModule, CountryComponent, HttpClientModule, CommonModule, NotFoundComponent, LoadingSpinnerComponent]
 })
 
 export class CountriesListComponent {

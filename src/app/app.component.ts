@@ -3,13 +3,14 @@ import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { FormSubmitServiceService } from './CountryFeature/services/form-submit-service.service';
 import { FetchCountriesService } from './CountryFeature/services/fetch-countries.service';
+import { LoadingSpinnerComponent } from "./CountryFeature/Widgets/loading-spinner/loading-spinner.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, RouterModule, CommonModule]
+    imports: [RouterOutlet, RouterModule, CommonModule, LoadingSpinnerComponent]
 })
 export class AppComponent {
   constructor(private formSubmitService : FormSubmitServiceService, private router: Router) {}

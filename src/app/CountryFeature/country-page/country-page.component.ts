@@ -4,14 +4,15 @@ import { Country, FetchCountriesService } from '../services/fetch-countries.serv
 import { CommonModule } from '@angular/common';
 import { PictureCarouselComponent } from "../Widgets/picture-carousel/picture-carousel.component";
 import { FetchPicturesService } from '../services/fetch-pictures.service';
-import { Observable , pipe} from 'rxjs';
+import { forkJoin} from 'rxjs';
+import { LoadingSpinnerComponent } from "../Widgets/loading-spinner/loading-spinner.component";
 
 @Component({
     selector: 'app-country-page',
     standalone: true,
     templateUrl: './country-page.component.html',
     styleUrl: './country-page.component.css',
-    imports: [CommonModule, PictureCarouselComponent]
+    imports: [CommonModule, PictureCarouselComponent, LoadingSpinnerComponent]
 })
 export class CountryPageComponent {
   countryObject!: Country; 
@@ -21,13 +22,24 @@ export class CountryPageComponent {
   pictureService = inject(FetchPicturesService);
   pictureArray:string[] = [];
   urls: string[] = [];
+  isLoaded:boolean = false;
 
   ngOnInit(): void {
-    this.dataService.getSpecificCountry(this.activatedRouter.snapshot.params['name']).subscribe(x => {
-      this.countryObject = x[0]});
+    const subscribe1 = this.dataService.getSpecificCountry(this.activatedRouter.snapshot.params['name']);
+    const subscribe2 = this.pictureService.getPhotosByCountryName(this.activatedRouter.snapshot.params['name']);
 
-      this.pictureService.getPhotosByCountryName(this.activatedRouter.snapshot.params['name']).subscribe(x =>{
-        this.pictureArray = x;
-      });
+    forkJoin([subscribe1, subscribe2]).subscribe({
+      next: ([country, pictures]) => {
+        this.countryObject = country[0];
+        this.pictureArray = pictures;
+        this.isLoaded = !this.isLoaded;
+        console.log(this.isLoaded); 
+      },
+      error: error => {
+        console.error('Error fetching data:', error);
+      }
+    });
+
+
   }
 }

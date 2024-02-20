@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, map, pluck, retry, throwError } from 'rxjs';
-import { query } from '@angular/animations';
+import { Observable, catchError, delay, map, pluck, retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class FetchPicturesService {
   getPhotosByCountryName(countryName: string): Observable<any> {
     return this.http.get<any>(`https://api.unsplash.com/search/photos/?query=${countryName}`, {
       headers:{
-        Authorization: 'Client-ID Jk6Hdxbp-wSVS0rInvKMgV21jfoxWoJbxlkGEeg45N0',
+        Authorization: 'Client-ID neNWN4uHjkb19UDByU9zFEU4szEA6TCkK_o-S9bHze0',
       }
     }).pipe(
       retry(3),
