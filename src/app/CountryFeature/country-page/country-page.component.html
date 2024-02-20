@@ -1,3 +1,20 @@
 <app-loading-spinner *ngIf="!isLoaded"></app-loading-spinner>
-
-<app-picture-carousel [images]="pictureArray" [imageWidth]="250" [imageHeigth]="250" *ngIf="isLoaded"></app-picture-carousel>
+<div class="ui items">
+   <div class="item">
+     <div>
+      <app-picture-carousel [images]="pictureArray" [imageWidth]="250" [imageHeigth]="250" *ngIf="isLoaded"></app-picture-carousel>
+     </div>
+     <div class="content">
+       <a class="header">{{countryName}}</a>
+       <div class="meta">
+         <span>Population: {{getPopulation()}}</span>
+       </div>
+       <div class="description">
+         <p>Continent: {{getContinents()}}</p>
+         <p>Capital: {{getCapital()}}</p>
+         <p [innerHTML]="'Wiki snippet info: ' + getSnippet()"></p>
+         <button (click)="onClick()" class="ui button">Go to Wiki</button>
+       </div>
+     </div>
+   </div>
+ </div>
